@@ -9,7 +9,15 @@
 /* eslint-disable */
 
 export abstract class IQuery {
-    abstract test(): Nullable<string> | Promise<Nullable<string>>;
+    abstract test(): string | Promise<string>;
+
+    abstract todos(): Todo[] | Promise<Todo[]>;
+}
+
+export class Todo {
+    id: number;
+    title: string;
+    done: boolean;
 }
 
 type Nullable<T> = T | null;

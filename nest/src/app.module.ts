@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { CatsController } from './cats.controller';
 import { TestResolver } from './test/test.resolvers';
+import { TodosResolver } from './todos/todos.resolver';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppService } from './app.service';
@@ -19,6 +20,6 @@ import { join } from 'path';
     }),
   ],
   controllers: [AppController, CatsController],
-  providers: [AppService, TestResolver],
+  providers: [AppService, TestResolver, TodosResolver],
 })
 export class AppModule {}
