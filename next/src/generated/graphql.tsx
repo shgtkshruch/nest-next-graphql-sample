@@ -39,6 +39,8 @@ export type GetTestQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetTestQuery = { __typename?: 'Query', test: string };
 
+export type TodoInfoFragment = { __typename?: 'Todo', id: number, title: string, done: boolean };
+
 export type GetTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -51,7 +53,13 @@ export type GetTodoQueryVariables = Exact<{
 
 export type GetTodoQuery = { __typename?: 'Query', getTodo?: { __typename?: 'Todo', id: number, title: string, done: boolean } | null };
 
-
+export const TodoInfoFragmentDoc = gql`
+    fragment TodoInfo on Todo {
+  id
+  title
+  done
+}
+    `;
 export const GetTestDocument = gql`
     query GetTest {
   test
@@ -87,12 +95,10 @@ export type GetTestQueryResult = Apollo.QueryResult<GetTestQuery, GetTestQueryVa
 export const GetTodosDocument = gql`
     query GetTodos {
   todos {
-    id
-    title
-    done
+    ...TodoInfo
   }
 }
-    `;
+    ${TodoInfoFragmentDoc}`;
 
 /**
  * __useGetTodosQuery__
@@ -123,12 +129,10 @@ export type GetTodosQueryResult = Apollo.QueryResult<GetTodosQuery, GetTodosQuer
 export const GetTodoDocument = gql`
     query GetTodo($id: Int!) {
   getTodo(id: $id) {
-    id
-    title
-    done
+    ...TodoInfo
   }
 }
-    `;
+    ${TodoInfoFragmentDoc}`;
 
 /**
  * __useGetTodoQuery__

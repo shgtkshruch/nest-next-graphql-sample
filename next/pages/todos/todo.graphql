@@ -1,15 +1,17 @@
+fragment TodoInfo on Todo {
+  id
+  title
+  done
+}
+
 query GetTodos {
   todos {
-    id
-    title
-    done
+    ...TodoInfo
   }
 }
 
 query GetTodo($id: Int!) {
   getTodo(id: $id) {
-    id
-    title
-    done
+    ...TodoInfo
   }
 }
