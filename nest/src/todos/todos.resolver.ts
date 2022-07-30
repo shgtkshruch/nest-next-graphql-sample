@@ -5,17 +5,17 @@ import { todos } from './todos';
 @Resolver()
 export class TodosResolver {
   @Query('todos')
-  async todos(): Promise<Todo[]> {
+  todos(): Todo[] {
     return todos;
   }
 
   @Query('getTodo')
-  async getTodo(@Args('id') id: number) {
+  getTodo(@Args('id') id: number): Todo {
     return todos.filter((todo) => todo.id === id)[0];
   }
 
   @Mutation()
-  async createTodo(@Args('title') title: string) {
+  createTodo(@Args('title') title: string): Todo {
     const todo = {
       id: todos.length + 1,
       title,
