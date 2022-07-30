@@ -3,7 +3,7 @@ import Head from 'next/head'
 import React from 'react'
 import { useGetTodosQuery } from '../../src/generated/graphql';
 
-const Home: NextPage = () => {
+export const Todos: NextPage = () => {
   const { loading, error, data } = useGetTodosQuery();
 
   if (loading) return <p>Loading...</p>;
@@ -27,4 +27,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Todos
