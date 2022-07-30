@@ -15,3 +15,9 @@ query GetTodo($id: Int!) {
     ...TodoInfo
   }
 }
+
+mutation CreateTodo($title: String!) {
+  createTodo(title: $title) {
+    ...TodoInfo
+  }
+}
