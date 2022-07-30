@@ -22,7 +22,6 @@ This repository is used in the `npx create-turbo@latest` command, and selected w
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
 npm run build
 ```
 
@@ -31,7 +30,6 @@ npm run build
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
 npm run dev
 ```
 
@@ -42,7 +40,6 @@ Turborepo can use a technique known as [Remote Caching](https://turborepo.org/do
 By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
 
 ```
-cd my-turborepo
 npx turbo login
 ```
 
