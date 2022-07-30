@@ -1,5 +1,6 @@
 schema:
   - ../nest/src/test/*.graphql
+  - ../nest/src/todos/*.graphql
 documents: pages/**/*.graphql
 generates:
   src/generated/graphql.tsx:

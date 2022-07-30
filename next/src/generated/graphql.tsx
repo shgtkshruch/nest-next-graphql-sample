@@ -17,13 +17,26 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  test?: Maybe<Scalars['String']>;
+  test: Scalars['String'];
+  todos: Array<Todo>;
+};
+
+export type Todo = {
+  __typename?: 'Todo';
+  done: Scalars['Boolean'];
+  id: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 export type GetTestQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTestQuery = { __typename?: 'Query', test?: string | null };
+export type GetTestQuery = { __typename?: 'Query', test: string };
+
+export type GetTodosQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTodosQuery = { __typename?: 'Query', todos: Array<{ __typename?: 'Todo', id: number, title: string, done: boolean }> };
 
 
 export const GetTestDocument = gql`
@@ -58,3 +71,39 @@ export function useGetTestLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
 export type GetTestQueryHookResult = ReturnType<typeof useGetTestQuery>;
 export type GetTestLazyQueryHookResult = ReturnType<typeof useGetTestLazyQuery>;
 export type GetTestQueryResult = Apollo.QueryResult<GetTestQuery, GetTestQueryVariables>;
+export const GetTodosDocument = gql`
+    query GetTodos {
+  todos {
+    id
+    title
+    done
+  }
+}
+    `;
+
+/**
+ * __useGetTodosQuery__
+ *
+ * To run a query within a React component, call `useGetTodosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTodosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTodosQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTodosQuery(baseOptions?: Apollo.QueryHookOptions<GetTodosQuery, GetTodosQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTodosQuery, GetTodosQueryVariables>(GetTodosDocument, options);
+      }
+export function useGetTodosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTodosQuery, GetTodosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTodosQuery, GetTodosQueryVariables>(GetTodosDocument, options);
+        }
+export type GetTodosQueryHookResult = ReturnType<typeof useGetTodosQuery>;
+export type GetTodosLazyQueryHookResult = ReturnType<typeof useGetTodosLazyQuery>;
+export type GetTodosQueryResult = Apollo.QueryResult<GetTodosQuery, GetTodosQueryVariables>;
