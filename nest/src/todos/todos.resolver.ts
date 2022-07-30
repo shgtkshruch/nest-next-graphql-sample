@@ -2,26 +2,35 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { Todo } from '../graphql';
 import { todos } from './todos';
 
+let todoList = todos;
+let id = todoList.length;
+
 @Resolver()
 export class TodosResolver {
   @Query('todos')
   todos(): Todo[] {
-    return todos;
+    return todoList;
   }
 
   @Query('getTodo')
   getTodo(@Args('id') id: number): Todo {
-    return todos.filter((todo) => todo.id === id)[0];
+    return todoList.filter((todo) => todo.id === id)[0];
   }
 
   @Mutation()
   createTodo(@Args('title') title: string): Todo {
     const todo = {
-      id: todos.length + 1,
+      id: ++id,
       title,
       done: false,
     };
-    todos.push(todo);
+    todoList.push(todo);
     return todo;
+  }
+
+  @Mutation()
+  deleteTodo(@Args('id') id: number): string {
+    todoList = todoList.filter((todo) => todo.id !== id);
+    return 'ok';
   }
 }

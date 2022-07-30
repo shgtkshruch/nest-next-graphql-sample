@@ -1,14 +1,27 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
-import { useGetTodosQuery } from "../../src/generated/graphql";
-import { AddTodoForm } from './AddTodoForm';
+import {
+  useGetTodosQuery,
+  useDeleteTodoMutation,
+} from "../../src/generated/graphql";
+import { AddTodoForm } from "./AddTodoForm";
 
 export const Todos: NextPage = () => {
   const { loading, error, data, refetch } = useGetTodosQuery();
+  const [deleteTodoMutation] = useDeleteTodoMutation();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
+
+  async function deleteTodo(id: number) {
+    await deleteTodoMutation({
+      variables: {
+        id,
+      },
+    });
+    refetch();
+  }
 
   return (
     <>
@@ -21,9 +34,13 @@ export const Todos: NextPage = () => {
       <ul>
         {data!.todos.map((todo) => (
           <li key={todo.id}>
+            <span>{todo.id} </span>
             <span>{todo.title}</span>
             <span> </span>
-            <span>{todo.done ? "完了" : "未完了"}</span>
+            <span>{todo.done ? "完了" : "未完了"} </span>
+            <button type="button" onClick={() => deleteTodo(todo.id)}>
+              x
+            </button>
           </li>
         ))}
       </ul>
