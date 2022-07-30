@@ -22,6 +22,10 @@ mutation CreateTodo($title: String!) {
   }
 }
 
+mutation DoneTodo($id: Int!) {
+  doneTodo(id: $id)
+}
+
 mutation DeleteTodo($id: Int!) {
   deleteTodo(id: $id)
 }

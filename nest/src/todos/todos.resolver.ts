@@ -29,6 +29,15 @@ export class TodosResolver {
   }
 
   @Mutation()
+  doneTodo(@Args('id') id: number): string {
+    todoList = todoList.map((todo) => {
+      if (todo.id !== id) return todo;
+      return { ...todo, done: true };
+    });
+    return 'ok';
+  }
+
+  @Mutation()
   deleteTodo(@Args('id') id: number): string {
     todoList = todoList.filter((todo) => todo.id !== id);
     return 'ok';

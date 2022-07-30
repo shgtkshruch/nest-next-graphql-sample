@@ -6,6 +6,7 @@ type Query {
 type Mutation {
   createTodo(title: String!): Todo!
   deleteTodo(id: Int!): String
+  doneTodo(id: Int!): String
 }
 
 type Todo {
