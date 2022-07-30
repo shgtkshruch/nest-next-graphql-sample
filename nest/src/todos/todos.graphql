@@ -3,6 +3,10 @@ type Query {
   getTodo(id: Int!): Todo
 }
 
+type Mutation {
+  createTodo(title: String!): Todo!
+}
+
 type Todo {
   id: Int!
   title: String!

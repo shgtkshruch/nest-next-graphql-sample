@@ -16,6 +16,10 @@ export abstract class IQuery {
     abstract getTodo(id: number): Nullable<Todo> | Promise<Nullable<Todo>>;
 }
 
+export abstract class IMutation {
+    abstract createTodo(title: string): Todo | Promise<Todo>;
+}
+
 export class Todo {
     id: number;
     title: string;
