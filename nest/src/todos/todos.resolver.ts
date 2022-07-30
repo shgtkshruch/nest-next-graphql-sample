@@ -1,21 +1,16 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 import { Todo } from '../graphql';
+import { todos } from './todos';
 
 @Resolver()
 export class TodosResolver {
   @Query('todos')
   async todos(): Promise<Todo[]> {
-    return [
-      {
-        id: 1,
-        title: 'Frist Todo',
-        done: false,
-      },
-      {
-        id: 2,
-        title: 'Second Todo',
-        done: true,
-      },
-    ];
+    return todos;
+  }
+
+  @Query('getTodo')
+  async getTodo(@Args('id') id: number) {
+    return todos.filter((todo) => todo.id === id)[0];
   }
 }

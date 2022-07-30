@@ -12,6 +12,8 @@ export abstract class IQuery {
     abstract test(): string | Promise<string>;
 
     abstract todos(): Todo[] | Promise<Todo[]>;
+
+    abstract getTodo(id: number): Nullable<Todo> | Promise<Nullable<Todo>>;
 }
 
 export class Todo {
